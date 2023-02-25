@@ -31,7 +31,7 @@ jobs:
           name: insert SDK key and flag key into demo code
           command: |
             sed -i.bak "s/SdkKey *= *\".*\"/SdkKey = \"${LD_HELLO_WORLD_SDK_KEY}\"/" ./src/main/java/Main.java
-            sed -i.bak "s/FeatureFlagKey *= *\".*\"/FeatureFlagKey = \"${LD_HELLO_WORLD_FLAG_KEY_WITH_TRUE_VALUE}\"/" ./src/main/java/com.example/Main.java
+            sed -i.bak "s/FeatureFlagKey *= *\".*\"/FeatureFlagKey = \"${LD_HELLO_WORLD_FLAG_KEY_WITH_TRUE_VALUE}\"/" ./src/main/java/Main.java
       - run:
           name: run demo
           command: ./gradlew run
