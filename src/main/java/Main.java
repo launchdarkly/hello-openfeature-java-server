@@ -1,7 +1,3 @@
-import com.launchdarkly.logging.LDLogAdapter;
-import com.launchdarkly.logging.LDLogLevel;
-import com.launchdarkly.sdk.server.Components;
-import com.launchdarkly.sdk.server.LDConfig;
 import dev.openfeature.sdk.*;
 import com.launchdarkly.openfeature.serverprovider.Provider;
 
