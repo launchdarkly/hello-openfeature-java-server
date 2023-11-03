@@ -1,9 +1,9 @@
 import dev.openfeature.sdk.*;
-import com.launchdarkly.sdk.server.LDClient;
 import com.launchdarkly.openfeature.serverprovider.Provider;
 
 import java.io.IOException;
 import java.util.HashMap;
+
 
 public class Main {
     // Set SdkKey to your LaunchDarkly SDK key.
@@ -12,18 +12,18 @@ public class Main {
     // Set FeatureFlagKey to the feature flag key you want to evaluate.
     private static String FeatureFlagKey = "my-boolean-flag";
     public static void main(String[] args) throws IOException {
-        LDClient ldClient = new LDClient(SdkKey);
+        Provider provider = new Provider(SdkKey);
 
-        if(ldClient.isInitialized()) {
-            System.out.println("SDK successfully initialized!");
-        } else {
-            System.out.println("SDK failed to initialize");
-            System.exit(1);
-            return;
-        }
-
-        OpenFeatureAPI.getInstance().setProvider(new Provider(ldClient));
+        OpenFeatureAPI.getInstance().setProviderAndWait(provider);
         Client client = OpenFeatureAPI.getInstance().getClient();
+
+        client.onProviderReady(eventDetails -> {
+            System.out.println("SDK successfully initialized!");
+        });
+
+        client.onProviderError(eventDetails -> {
+            System.out.println("SDK failed to initialize");
+        });
 
         // Set up the user properties. This user should appear on your LaunchDarkly users dashboard
         // soon after you run the demo.
@@ -40,6 +40,10 @@ public class Main {
         // the context properties and flag usage statistics will not appear on your dashboard. In a
         // normal long-running application, the SDK would continue running and events would be
         // delivered automatically in the background.
-        ldClient.close();
+        provider.getLdClient().close();
+
+        // Ideally we would use the shutdown method supported by OpenFeature, but it is not blocking and therefore
+        // does not guarantee delivery of events.
+        // OpenFeatureAPI.getInstance().shutdown();
     }
 }

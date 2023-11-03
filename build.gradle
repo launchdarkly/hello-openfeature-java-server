@@ -8,6 +8,8 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    // Before LaunchDarkly release artifacts get synced to Maven Central they are here along with snapshots:
+    maven { url "https://oss.sonatype.org/content/groups/public/" }
 }
 
 application {
@@ -15,7 +17,7 @@ application {
 }
 
 dependencies {
-    implementation group: 'com.launchdarkly', name: 'launchdarkly-openfeature-serverprovider', version: '0.1.0'
+    implementation group: 'com.launchdarkly', name: 'launchdarkly-openfeature-serverprovider', version: '0.2.0'
     implementation group: 'com.launchdarkly', name: 'launchdarkly-java-server-sdk', version: '[6.0.0, 7.0.0)'
     implementation 'dev.openfeature:sdk:[1.2.0,2.0.0)'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
