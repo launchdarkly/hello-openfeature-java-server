@@ -6,13 +6,18 @@ import java.util.HashMap;
 
 
 public class Main {
-    // Set SdkKey to your LaunchDarkly SDK key.
-    private static String SdkKey = "";
-
-    // Set FeatureFlagKey to the feature flag key you want to evaluate.
-    private static String FeatureFlagKey = "my-boolean-flag";
     public static void main(String[] args) throws IOException {
-        Provider provider = new Provider(SdkKey);
+        String sdkKey = System.getenv("LAUNCHDARKLY_SDK_KEY");
+        String flagKey = System.getenv("LAUNCHDARKLY_FLAG_KEY");
+
+        sdkKey = sdkKey != null ? sdkKey : "";
+        flagKey = flagKey != null ? flagKey : "sample-feature";
+
+        if(sdkKey == null || sdkKey.isEmpty()) {
+            System.out.println("Please set an SDK key using the LAUNCHDARKLY_SDK_KEY environment variable.");
+        }
+
+        Provider provider = new Provider(sdkKey);
 
         OpenFeatureAPI.getInstance().setProviderAndWait(provider);
         Client client = OpenFeatureAPI.getInstance().getClient();
@@ -32,18 +37,9 @@ public class Main {
             put("name", new Value("Sandy"));
         }});
 
-        boolean value = client.getBooleanValue(FeatureFlagKey, false, context);
-        System.out.printf("Feature flag '%s' is %s for this context\n", FeatureFlagKey, value);
+        boolean value = client.getBooleanValue(flagKey, false, context);
+        System.out.println("The '" + flagKey + "' feature flag evaluates to " + value + ".");
 
-        // Here we ensure that the SDK shuts down cleanly and has a chance to deliver analytics
-        // events to LaunchDarkly before the program exits. If analytics events are not delivered,
-        // the context properties and flag usage statistics will not appear on your dashboard. In a
-        // normal long-running application, the SDK would continue running and events would be
-        // delivered automatically in the background.
-        provider.getLdClient().close();
-
-        // Ideally we would use the shutdown method supported by OpenFeature, but it is not blocking and therefore
-        // does not guarantee delivery of events.
-        // OpenFeatureAPI.getInstance().shutdown();
+        OpenFeatureAPI.getInstance().shutdown();
     }
 }
