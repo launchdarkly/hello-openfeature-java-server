@@ -15,6 +15,7 @@ public class Main {
 
         if(sdkKey == null || sdkKey.isEmpty()) {
             System.out.println("Please set an SDK key using the LAUNCHDARKLY_SDK_KEY environment variable.");
+            System.exit(1);
         }
 
         Provider provider = new Provider(sdkKey);
