@@ -31,4 +31,4 @@ jobs:
         with:
           use_server_key: true
           role_arn: ${{ vars.AWS_ROLE_ARN }}
-          command:  ./gradlew run
+          command:  ./gradlew run --console=plain
