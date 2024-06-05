@@ -7,8 +7,11 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        System.out.println("STARTING HELLO EXAMPLE");
         String sdkKey = System.getenv("LAUNCHDARKLY_SDK_KEY");
+        System.out.println("GOT SDK KEY");
         String flagKey = System.getenv("LAUNCHDARKLY_FLAG_KEY");
+        System.out.println("GOT FLAG KEY");
 
         sdkKey = sdkKey != null ? sdkKey : "";
         flagKey = flagKey != null ? flagKey : "sample-feature";
