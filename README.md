@@ -15,4 +15,4 @@ This project uses Gradle. It requires that Java is already installed on your sys
 
 2. On the command line, run `./gradlew run`.
 
-You should see the message `"Feature flag '<flag key>' is <true/false> for this context"`.
+You should see the message `"The <flag key> feature flag evaluates to <true/false>"`.
