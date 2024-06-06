@@ -39,7 +39,7 @@ public class Main {
         }});
 
         boolean value = client.getBooleanValue(flagKey, false, context);
-        System.out.println("The '" + flagKey + "' feature flag evaluates to " + value + ".");
+        System.out.println("The " + flagKey + " feature flag evaluates to " + value + ".");
 
         OpenFeatureAPI.getInstance().shutdown();
     }
