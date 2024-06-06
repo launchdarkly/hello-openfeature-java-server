@@ -23,14 +23,15 @@ public class Main {
         OpenFeatureAPI.getInstance().setProviderAndWait(provider);
         Client client = OpenFeatureAPI.getInstance().getClient();
 
+        String finalFlagKey = flagKey;
         client.onProviderReady(eventDetails -> {
             System.out.println("SDK successfully initialized!");
             EvaluationContext context = new ImmutableContext("example-user-key", new HashMap<>(){{
                 put("kind", new Value("User"));
                 put("name", new Value("Sandy"));
             }});
-            boolean value = client.getBooleanValue(flagKey, false, context);
-            System.out.println("The " + flagKey + " feature flag evaluates to " + value + ".");
+            boolean value = client.getBooleanValue(finalFlagKey, false, context);
+            System.out.println("The " + finalFlagKey + " feature flag evaluates to " + value + ".");
         });
 
         client.onProviderError(eventDetails -> {
