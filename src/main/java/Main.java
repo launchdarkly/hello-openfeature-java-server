@@ -26,12 +26,6 @@ public class Main {
         String finalFlagKey = flagKey;
         client.onProviderReady(eventDetails -> {
             System.out.println("SDK successfully initialized!");
-            EvaluationContext context = new ImmutableContext("example-user-key", new HashMap<>(){{
-                put("kind", new Value("User"));
-                put("name", new Value("Sandy"));
-            }});
-            boolean value = client.getBooleanValue(finalFlagKey, false, context);
-            System.out.println("The " + finalFlagKey + " feature flag evaluates to " + value + ".");
         });
 
         client.onProviderError(eventDetails -> {
@@ -41,7 +35,7 @@ public class Main {
         // Set up the user properties. This user should appear on your LaunchDarkly users dashboard
         // soon after you run the demo.
         EvaluationContext context = new ImmutableContext("example-user-key", new HashMap<>(){{
-            put("kind", new Value("User"));
+            put("kind", new Value("user"));
             put("name", new Value("Sandy"));
         }});
 
