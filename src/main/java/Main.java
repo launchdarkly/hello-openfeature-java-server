@@ -20,17 +20,15 @@ public class Main {
 
         Provider provider = new Provider(sdkKey);
 
-        OpenFeatureAPI.getInstance().setProviderAndWait(provider);
-        Client client = OpenFeatureAPI.getInstance().getClient();
-
-        String finalFlagKey = flagKey;
-        client.onProviderReady(eventDetails -> {
-            System.out.println("SDK successfully initialized!");
-        });
-
-        client.onProviderError(eventDetails -> {
+        try {
+            OpenFeatureAPI.getInstance().setProviderAndWait(provider);
+        } catch(Exception e) {
             System.out.println("SDK failed to initialize");
-        });
+            System.exit(1);
+        }
+        System.out.println("SDK successfully initialized!");
+
+        Client client = OpenFeatureAPI.getInstance().getClient();
 
         // Set up the user properties. This user should appear on your LaunchDarkly users dashboard
         // soon after you run the demo.
