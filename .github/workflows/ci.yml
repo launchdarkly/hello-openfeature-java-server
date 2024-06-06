@@ -29,6 +29,12 @@ jobs:
 
       - run: ./gradlew assemble
 
+      - uses: launchdarkly/gh-actions/actions/release-secrets@release-secrets-v1.1.0
+        name: 'Get the server SDK key'
+        with:
+          aws_assume_role: ${{ vars.AWS_ROLE_ARN  }}
+          ssm_parameter_pairs: '/sdk/common/hello-apps/server-key = LAUNCHDARKLY_SDK_KEY'
+
       - run: java -jar build/libs/hello-openfeature-java-server-1.0-SNAPSHOT-all.jar
 
       - uses: launchdarkly/gh-actions/actions/verify-hello-app@verify-hello-app-v2.0.0
