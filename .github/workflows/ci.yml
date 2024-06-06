@@ -27,8 +27,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - run: ./gradlew assemble
+
       - uses: launchdarkly/gh-actions/actions/verify-hello-app@verify-hello-app-v2.0.0
         with:
           use_server_key: true
           role_arn: ${{ vars.AWS_ROLE_ARN }}
-          command:  ./gradlew run --console=plain
+          command:  java -jar build/libs/hello-openfeature-java-server-1.0-SNAPSHOT-all.jar
