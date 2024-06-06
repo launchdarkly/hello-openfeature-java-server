@@ -24,7 +24,13 @@ public class Main {
         Client client = OpenFeatureAPI.getInstance().getClient();
 
         client.onProviderReady(eventDetails -> {
-            System.out.println("SDK successfully initialized!");
+            System.out.println("SDK successfully initialized!");]
+            EvaluationContext context = new ImmutableContext("example-user-key", new HashMap<>(){{
+                put("kind", new Value("User"));
+                put("name", new Value("Sandy"));
+            }});
+            boolean value = client.getBooleanValue(flagKey, false, context);
+            System.out.println("The " + flagKey + " feature flag evaluates to " + value + ".");
         });
 
         client.onProviderError(eventDetails -> {
