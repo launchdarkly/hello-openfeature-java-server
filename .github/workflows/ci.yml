@@ -33,7 +33,8 @@ jobs:
         name: 'Get the server SDK key'
         with:
           aws_assume_role: ${{ vars.AWS_ROLE_ARN  }}
-          ssm_parameter_pairs: '/sdk/common/hello-apps/server-key = LAUNCHDARKLY_SDK_KEY'
+          ssm_parameter_pairs: '/sdk/common/hello-apps/server-key = LAUNCHDARKLY_SDK_KEY,
+          /sdk/common/hello-apps/boolean-flag-key = LAUNCHDARKLY_FLAG_KEY'
 
       - run: java -jar build/libs/hello-openfeature-java-server-1.0-SNAPSHOT-all.jar
 
