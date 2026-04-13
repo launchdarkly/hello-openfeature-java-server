@@ -4,7 +4,7 @@ We've built a simple console that demonstrates how LaunchDarkly's OpenFeature pr
 
 ## Build instructions
 
-This project uses Gradle. It requires that Java is already installed on your system (version 11 or higher). It will automatically use the latest release of the LaunchDarkly SDK with major version 6.
+This project uses Gradle. It requires that Java is already installed on your system (version 11 or higher). It will automatically use the latest release of the LaunchDarkly SDK with major version 7.
 
 1. Set the environment variable `LAUNCHDARKLY_SDK_KEY` to your LaunchDarkly SDK key. If there is an existing boolean feature flag in your LaunchDarkly project that you want to evaluate, set `LAUNCHDARKLY_FLAG_KEY` to the flag key; otherwise, a boolean flag of `sample-feature` will be assumed.
 
