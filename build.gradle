@@ -4,8 +4,8 @@ plugins {
     id 'com.gradleup.shadow' version "8.3.11"
 }
 
-group 'com.launchdarkly'
-version '1.0-SNAPSHOT'
+group = 'com.launchdarkly'
+version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
