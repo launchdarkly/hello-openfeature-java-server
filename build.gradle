@@ -27,8 +27,8 @@ dependencies {
     implementation group: 'com.launchdarkly', name: 'launchdarkly-openfeature-serverprovider', version: '[1.0.0, 2.0.0)'
     implementation group: 'com.launchdarkly', name: 'launchdarkly-java-server-sdk', version: '[7.0.0, 8.0.0)'
     implementation 'dev.openfeature:sdk:[1.2.0,2.0.0)'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.14.4'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.14.4'
 }
 
 test {
