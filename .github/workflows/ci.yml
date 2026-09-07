@@ -20,16 +20,16 @@ jobs:
       id-token: write # Needed if using OIDC to get release secrets.
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
           java-version: '17'
 
       - run: ./gradlew assemble
 
-      - uses: launchdarkly/gh-actions/actions/release-secrets@release-secrets-v1.1.0
+      - uses: launchdarkly/gh-actions/actions/release-secrets@release-secrets-v1.2.1
         name: 'Get the server SDK key'
         with:
           aws_assume_role: ${{ vars.AWS_ROLE_ARN  }}
@@ -38,7 +38,7 @@ jobs:
 
       - run: java -jar build/libs/hello-openfeature-java-server-1.0-SNAPSHOT-all.jar
 
-      - uses: launchdarkly/gh-actions/actions/verify-hello-app@verify-hello-app-v2.0.0
+      - uses: launchdarkly/gh-actions/actions/verify-hello-app@verify-hello-app-v2.0.1
         with:
           use_server_key: true
           role_arn: ${{ vars.AWS_ROLE_ARN }}
